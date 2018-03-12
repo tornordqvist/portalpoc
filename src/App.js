@@ -3,7 +3,7 @@ import React from 'react';
 import { Route, Link, Redirect } from "react-router-dom";
 import PropTypes from 'prop-types';
 import querystring from 'querystring';
-import { TradeModel } from './TradeModel';
+import { Trade } from './Trade';
 
 class Home extends React.Component {
   render() {
@@ -101,7 +101,7 @@ class EditTrade extends React.Component {
   }
   handleSubmit(event) {
     console.log("submit");
-    var trade = TradeModel.copy(this.state);
+    var trade = Trade.copy(this.state);
     trade.instrument = this.node.querySelector("#instrument").value;
     trade.price = Number(this.node.querySelector("#price").value);
     trade.quantity = Number(this.node.querySelector("#quantity").value);
@@ -120,7 +120,7 @@ class EditTrade extends React.Component {
     var id = this.props.match.params.id;
     var trade;
     if (id === "new") {
-      trade = new TradeModel(TradeModel.generateNewId(), new Date(), "Buy", "", 0, 0, 0);
+      trade = new Trade(Trade.generateNewId(), new Date(), "Buy", "", 0, 0, 0);
     }
     else {
       var trades = this.context.store.getState().trades;

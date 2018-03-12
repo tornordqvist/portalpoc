@@ -1,13 +1,13 @@
 import ReactDOM from 'react-dom';
 import './index.css';
 import { App } from './App';
-import { TradeModel } from './TradeModel';
+import { Trade } from './Trade';
 import registerServiceWorker from './registerServiceWorker';
 
 import React from 'react';
 import { BrowserRouter as Router } from "react-router-dom";
 import { applyMiddleware, createStore, combineReducers } from 'redux';
-//import logger from 'redux-logger'
+import logger from 'redux-logger'
 import promise from 'redux-promise-middleware';
 import { Provider } from 'react-redux'
 
@@ -57,7 +57,6 @@ const aggregatePositions = (store) => (next) => (action) => {
                 return p;
             }, { "CASH": 0 });
             var positions = Object.keys(posdict).map(d => ({ instrument: d, quantity: posdict[d] }));
-            //console.log(positions);
             store.dispatch({ type: "POSITIONS_SET", payload: positions });
             break;
         }
@@ -68,7 +67,7 @@ const aggregatePositions = (store) => (next) => (action) => {
 
 const store = createStore(
     combineReducers({ trades: tradesReducer, positions: positionsReducer }),
-    applyMiddleware(aggregatePositions, promise()/*, logger*/)
+    applyMiddleware(aggregatePositions, promise(), logger)
 );
 
 store.subscribe(()=>{
@@ -77,14 +76,14 @@ store.subscribe(()=>{
 
 store.dispatch({
     type: "TRADE_PUT", 
-    payload: TradeModel.createRandom()
+    payload: Trade.createRandom()
 });
 
 setInterval(()=> { 
 store.dispatch({
     type: "TRADE_FETCH", 
     payload: new Promise(function(resolve) { setTimeout(resolve, 100); })
-    .then(()=>TradeModel.createRandom())
+    .then(()=>Trade.createRandom())
 });
 }, 3000);
 
