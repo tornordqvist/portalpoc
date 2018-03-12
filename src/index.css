@@ -1,5 +1,45 @@
+*, button, input, optgroup, select, textarea {
+  font-family: 'GothamRounded-Book';
+  font-weight: 500;
+}
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-size: 1rem;
+}
+.trades .btn.btn-primary {
+  margin: 0 4px 4px 0;
+  padding: 0 3px 0 3px;
+  line-height: 21px;
+}
+ul {
+  padding-left: 0px;  
+}
+li {
+  display: table;
+}
+.tradesbuttons {
+  margin-bottom: 10px;
+}
+.col-form-label {
+  font-size: inherit;
+}
+.form-check-input {
+  margin-left: 0rem;
+}
+li.nav-item {
+  margin-right: 16px;
+}
+nav.navbar {
+  height: 60px;
+}
+hr {
+  margin-top: 0.1rem;
+}
+.positions .col-3 {
+  display: table-cell;
+  max-width: inherit;
+}
+.positions .col-3, .positions ul {
+  padding-left: 0;
 }
